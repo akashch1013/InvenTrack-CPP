@@ -61,9 +61,20 @@ std::string DateTime::toDisplayString() const {
 }
 
 int DateTime::daysUntil(const DateTime& futureDate) const {
-    auto diff = futureDate.timePoint_ - timePoint_;
-    auto hours = std::chrono::duration_cast<std::chrono::hours>(diff).count();
-    return static_cast<int>(hours / 24);
+    std::time_t t1 = SystemClock::to_time_t(timePoint_);
+    std::time_t t2 = SystemClock::to_time_t(futureDate.timePoint_);
+    std::tm tm1 = *std::localtime(&t1);
+    std::tm tm2 = *std::localtime(&t2);
+    tm1.tm_hour = 0;
+    tm1.tm_min = 0;
+    tm1.tm_sec = 0;
+    tm2.tm_hour = 0;
+    tm2.tm_min = 0;
+    tm2.tm_sec = 0;
+    std::time_t day1 = std::mktime(&tm1);
+    std::time_t day2 = std::mktime(&tm2);
+    double diffSeconds = std::difftime(day2, day1);
+    return static_cast<int>(diffSeconds / 86400.0);
 }
 
 bool DateTime::isPast(const DateTime& comparisonPoint) const {

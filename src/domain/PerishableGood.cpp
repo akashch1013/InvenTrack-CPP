@@ -28,8 +28,8 @@ bool PerishableGood::isExpired() const {
 }
 
 double PerishableGood::getMarkdownPercentage() const {
+    if (isExpired()) return 0.0; // Expired, not for sale
     int days = getDaysUntilExpiration();
-    if (days <= 0) return 0.0; // Expired, not for sale
     if (days <= 2) return 0.50; // 50% discount for immediate clearance
     if (days <= 5) return 0.25; // 25% discount
     if (days <= 7) return 0.10; // 10% discount
