@@ -51,11 +51,7 @@ void ConnectionPool::shutdown() {
 
 #if defined(STOREFORGE_HAS_LIBPQXX)
     while (!pool_.empty()) {
-        auto conn = std::move(pool_.front());
-        pool_.pop();
-        if (conn && conn->is_open()) {
-            conn->close();
-        }
+        pool_.pop(); // Destructor of std::unique_ptr<NativeConnection> closes connection via RAII
     }
     totalCreated_ = 0;
 #endif

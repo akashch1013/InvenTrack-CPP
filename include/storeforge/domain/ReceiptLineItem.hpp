@@ -7,6 +7,7 @@ namespace storeforge::domain {
 
 class ReceiptLineItem {
 public:
+    ReceiptLineItem() = default;
     ReceiptLineItem(core::LineItemId lineId,
                     core::ReceiptId receiptId,
                     core::ItemId itemId,

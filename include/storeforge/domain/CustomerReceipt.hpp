@@ -10,6 +10,7 @@ namespace storeforge::domain {
 
 class CustomerReceipt {
 public:
+    CustomerReceipt() = default;
     CustomerReceipt(core::ReceiptId id,
                     std::string receiptNumber,
                     std::string customerName,

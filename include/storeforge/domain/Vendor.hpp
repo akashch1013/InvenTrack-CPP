@@ -8,6 +8,7 @@ namespace storeforge::domain {
 
 class Vendor {
 public:
+    Vendor() = default;
     Vendor(core::VendorId id,
            std::string name,
            std::string contactEmail,

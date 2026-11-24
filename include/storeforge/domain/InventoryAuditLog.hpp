@@ -8,6 +8,7 @@ namespace storeforge::domain {
 
 class InventoryAuditLog {
 public:
+    InventoryAuditLog() = default;
     InventoryAuditLog(core::AuditLogId id,
                       core::ItemId itemId,
                       std::string itemSku,
